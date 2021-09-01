@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "prepare": "husky install",
+    "lint": "prettier --write src/**/*.ts",
     "clean": "del ./build/*",
     "build": "yarn clean && tsc"
   },
