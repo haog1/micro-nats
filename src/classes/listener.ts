@@ -2,12 +2,11 @@ import { Message, Stan } from 'node-nats-streaming'
 import { Event } from '../interfaces'
 
 export abstract class Listener<T extends Event> {
-  private subject: T['subject']
-  private client: Stan
-  protected ackWait = 5 * 1000
+  private readonly client: Stan
+  protected readonly ackWait = 5 * 1000
 
+  abstract subject: T['subject']
   abstract queueGroupName: string
-
   abstract onMessage(data: T['data'], msg: Message): void
 
   constructor(client: Stan) {
@@ -24,13 +23,10 @@ export abstract class Listener<T extends Event> {
   }
 
   listen() {
-    const subscription = this.client.subscribe(this.subject, this.queueGroupName, this.subscriptionOptions())
+    const sub = this.client.subscribe(this.subject, this.queueGroupName, this.subscriptionOptions())
 
-    subscription.on('message', (msg: Message) => {
-      console.log('Message received: ' + this.subject + ' / ' + this.queueGroupName)
-
-      const parseData = this.parseMessage(msg)
-      this.onMessage(parseData, msg)
+    sub.on('message', (msg: T['data']) => {
+      console.log('Received a message [' + msg.getSequence() + '] ' + msg.getData())
     })
   }
 
