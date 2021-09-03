@@ -1,6 +1,6 @@
 {
   "name": "@haog1/micro-nats",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A custom nats-streaming wrapper microservice",
   "engines": {
     "node": ">= 14.0.0"
