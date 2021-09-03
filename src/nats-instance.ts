@@ -16,9 +16,11 @@ class NatsInstance {
     return new Promise<void>((resolve, reject) => {
       this.client.on('connect', () => {
         if (!callback) {
-          return console.log('No callback provided.')
+          console.log('No callback provided.')
+          return resolve()
         }
         callback()
+        resolve()
       })
 
       this.client.on('error', err => {
