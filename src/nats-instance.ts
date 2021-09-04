@@ -33,6 +33,10 @@ class NatsInstance {
       })
     })
   }
+
+  close() {
+    this.client.close()
+  }
 }
 
 export const natsInstance = new NatsInstance()
