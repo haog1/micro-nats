@@ -10,6 +10,13 @@ class NatsInstance {
     return this._client
   }
 
+  getClient() {
+    if (!this._client) {
+      throw new Error('NATS client is not initialised')
+    }
+    return this.client
+  }
+
   connect(clusterId: string, clientId: string, options: StanOptions, callback?: Function, errorCallack?: Function) {
     this._client = nats.connect(clusterId, clientId, options)
 
