@@ -8,5 +8,6 @@ export interface TicketCreatedEvent {
     price: number
     userId: string
     description: string
+    version: number
   }
 }
