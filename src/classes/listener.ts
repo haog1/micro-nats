@@ -27,6 +27,7 @@ export abstract class Listener<T extends Event> {
 
     sub.on('message', (msg: T['data']) => {
       console.log('Received a message [' + msg.getSequence() + '] ' + msg.getData())
+      this.onMessage(this.parseMessage(msg), msg)
     })
   }
 
