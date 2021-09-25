@@ -2,7 +2,7 @@ import { Message, Stan } from 'node-nats-streaming'
 import { Event } from '../interfaces'
 
 export abstract class Listener<T extends Event> {
-  private readonly client: Stan
+  protected readonly client: Stan
   protected readonly ackWait = 5 * 1000
 
   abstract subject: T['subject']

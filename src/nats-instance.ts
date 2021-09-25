@@ -1,7 +1,7 @@
 import nats, { Stan, StanOptions } from 'node-nats-streaming'
 
 class NatsInstance {
-  private _client: Stan | undefined
+  protected _client: Stan | undefined
 
   get client() {
     if (!this._client) {
